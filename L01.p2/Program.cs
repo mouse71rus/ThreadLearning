@@ -9,7 +9,7 @@ namespace L01.p2
 {
     class Program
     {
-        private static void Sount()
+        private static void Sound()
         {
             Thread soundThread = Thread.CurrentThread;
             soundThread.Name = "SoundThread";
@@ -32,9 +32,8 @@ namespace L01.p2
             Console.WriteLine();
 
             Console.WriteLine("Start.. ");
-
-            ThreadStart ts = new ThreadStart(Sount);
-            Thread secondThread = new Thread(ts);
+            
+            Thread secondThread = new Thread(Sound); // Так тоже можно
             secondThread.Start();
 
 
