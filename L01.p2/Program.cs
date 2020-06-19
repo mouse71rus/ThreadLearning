@@ -11,12 +11,18 @@ namespace L01.p2
     {
         private static void Sount()
         {
+            Thread soundThread = Thread.CurrentThread;
+            soundThread.Name = "SoundThread";
+
+            Console.WriteLine($"Thread: {soundThread.Name}, ID: {soundThread.GetHashCode()}");
             for (int i = 0; i < 100; i++)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("+ ");
                 Thread.Sleep(10);
             }
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine($"\nThread: {soundThread.Name}, ID: {soundThread.GetHashCode()}, stopped");
         }
 
         static void Main(string[] args)
@@ -31,6 +37,11 @@ namespace L01.p2
             Thread secondThread = new Thread(ts);
             secondThread.Start();
 
+
+            Thread currentThread = Thread.CurrentThread;
+            currentThread.Name = "CurrentThread";
+            Console.WriteLine($"Thread: {currentThread.Name}, ID: {currentThread.GetHashCode()}");
+
             for (int i = 0; i < 100; i++)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -39,7 +50,7 @@ namespace L01.p2
             }
 
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine("\nFinish.. ");
+            Console.WriteLine($"\nThread: {currentThread.Name}, ID: {currentThread.GetHashCode()}, stopped");
             Console.ReadKey();
         }
     }
