@@ -9,8 +9,8 @@ namespace L04.p1
 {
     class Program
     {
-        private static int count;
-        private static int value = 1;
+        private static long count;
+        private static long value = 1;
         private static Random rnd = new Random();
 
         static void Main(string[] args)
@@ -23,7 +23,7 @@ namespace L04.p1
             Thread tRead = new Thread(ReadData) { IsBackground = true };
             tRead.Start();
 
-            Thread[] threads = new Thread[2500];
+            Thread[] threads = new Thread[200];
             Console.WriteLine($"Thread.Length: {threads.Length}");
 
             for (int i = 0; i < threads.Length; i++)
@@ -38,17 +38,22 @@ namespace L04.p1
 
         private static void ChangeCount()
         {
-            count += value;
+            //count += value;
+            Interlocked.Add(ref count, value);
+
             Thread.Sleep(rnd.Next(100, 500));
-            count -= value;
+
+            //count -= value;
+            Interlocked.Add(ref count, -value);
         }
 
         private static void ReadData()
         {
             while(true)
             {
-                Console.WriteLine($"Count: {count}");
-                Thread.Sleep(200);
+                long a = Interlocked.Read(ref count);
+                Console.WriteLine($"Count: {a}");
+                Thread.Sleep(300);
             }
         }
     
