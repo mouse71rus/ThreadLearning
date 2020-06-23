@@ -23,7 +23,6 @@ namespace L05.p8
             {
                 cancellationTokSou.Cancel();
                 task1.Wait();
-                //await task1;
             }
             catch(AggregateException ex)
             {
@@ -31,7 +30,7 @@ namespace L05.p8
                 {
                     Console.WriteLine("Task was canceled");
                 }
-                Console.WriteLine($"\t - {ex.InnerException.Message}");
+                Console.WriteLine($"\t - {ex.InnerException?.Message}");
             }
             catch (OperationCanceledException ex)
             {
