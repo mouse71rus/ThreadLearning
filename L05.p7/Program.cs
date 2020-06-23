@@ -38,7 +38,7 @@ namespace L05.p7
         {
             int o = (int)arg;
             double sum = 0;
-            
+            Thread.Sleep(1000);
             while (o > 0)
             {
                 sum += o--;
