@@ -25,7 +25,7 @@ namespace L05.p3
         static void Main(string[] args)
         {
             Console.WriteLine();
-            Console.WriteLine("L05.p2");
+            Console.WriteLine("L05.p3");
             Console.WriteLine();
 
             var task1 = new Task(Method);
