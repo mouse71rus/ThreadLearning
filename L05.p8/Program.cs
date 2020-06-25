@@ -32,18 +32,10 @@ namespace L05.p8
                 }
                 Console.WriteLine($"\t - {ex.InnerException?.Message}");
             }
-            catch (OperationCanceledException ex)
-            {
-                if (task1.IsCanceled)
-                {
-                    Console.WriteLine("Task was canceled");
-                }
-                Console.WriteLine($"\t - {ex.InnerException?.Message}");
-            }
             finally
             {
-                //task1.Dispose();
-                //cancellationTokSou.Dispose();
+                task1.Dispose();
+                cancellationTokSou.Dispose();
             }
             Console.WriteLine("Main() was finished");
             Console.ReadKey();
@@ -53,7 +45,7 @@ namespace L05.p8
         {
             var token = (CancellationToken)cancel;
 
-            //token.ThrowIfCancellationRequested(); // Won't throw exception
+            token.ThrowIfCancellationRequested(); // Won't throw exception
             Console.WriteLine($"Method() CurrentID: {Task.CurrentId} working..");
 
             for (int i = 0; i < 50; i++)
@@ -62,7 +54,6 @@ namespace L05.p8
                 {
                     Console.WriteLine("Request for cancel task");
                     token.ThrowIfCancellationRequested(); // throw exception
-                    //throw new OperationCanceledException(token);
                 }
                 Thread.Sleep(200);
                 Console.WriteLine($"Method #{Task.CurrentId}: i = {i}");
